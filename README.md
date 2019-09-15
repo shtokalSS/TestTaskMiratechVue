@@ -1,4 +1,4 @@
-# lab1_test
+# TestTaskVue
 
 ## Project setup
 ```
@@ -9,7 +9,10 @@ npm install
 ```
 npm run serve
 ```
-
+### Set api path
+```
+Just change variable `BASE_API` in config.js file
+```
 ### Compiles and minifies for production
 ```
 npm run build
