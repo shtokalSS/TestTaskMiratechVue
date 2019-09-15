@@ -16,8 +16,9 @@ export default new Router({
       component: Employees
     },
     {
-      path: "/user-meetings/:userId",
+      path: "/employee-meetings/:employeeId",
       name: "employeeMeetings",
+      props: true,
       component: EmployeeMeetings
     },
     {

@@ -2,45 +2,48 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <ListItems />
+    <ul class="employees">
+      <router-link
+        tag="li"
+        class="employee"
+        v-for="employee in employees"
+        :key="employee.id"
+        :to="{ name: 'employeeMeetings', params: { employeeId: employee.id, employeeName: employee.fullName }}"
+      >{{ employee.fullName }}</router-link>
+    </ul>
   </div>
 </template>
 
-<script >
-import ListItems from '@/components/ListItems.vue'
+<script>
+// import ListItems from '@/components/ListItems.vue'
 // import HelloWorld from "@/components/HelloWorld.vue";
-
-
-
+import axios from "axios";
+import BASE_API from "../config"
 export default {
   name: "home",
-  components:{
-    // HelloWorld,
-    ListItems
-  },
   data() {
     return {
-      employees: [
-        { id: 1, name: "BMW" },
-        { id: 2, name: "Google"},
-        { id: 3, name: "Apple"},
-        { id: 4, name: "Twitter"}
-      ],
-      linkPathBase: "userMettings"
+      employees: Array
     };
+  },
+  mounted() {
+    // console.log(BASE_API+"/Employees/GetAll");
+    axios.get(BASE_API+"/Employees/GetAll").then(response => {
+      this.employees = response.data;
+    });
   }
 };
 </script>
 
+<style>
+@import "./List.css";
 
-<style scoped>
-ul {
-  list-style: none;
-  padding: 0;
+.employee {
+  font-size: 200%;
 }
-li {
-  padding: 5px 10px;
-  background-color: #EEEEEE;
-  border: 1px solid #DDDDDD;
+.employee:hover {
+  background-color: #b34ee9;
+  cursor: pointer;
+  color: white;
 }
 </style>
